@@ -1,0 +1,10 @@
+.search-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.btn-primary {
+    margin: 0 auto;
+    display: block;
+    text-align: center;
+}
