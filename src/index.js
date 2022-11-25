@@ -15,7 +15,7 @@ async function getImages() {
     const res = await axios.get(`?key=${API_KEY}&q=cat&`, params);
     const i = res.data;
     const f = i.hits
-    console.log({});
+    console.log();
 }
 
 getImages();
