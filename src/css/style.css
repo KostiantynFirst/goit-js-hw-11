@@ -39,7 +39,7 @@ a {
     grid-gap: 10px;
   }
 
-  @media (max-width: 1400px) {
+  /* @media (max-width: 1400px) {
     .gallery {
       grid-template-columns: 1fr 1fr 1fr;
     }
@@ -55,7 +55,7 @@ a {
     .gallery {
       grid-template-columns: 1fr;
     }
-  }
+  } */
 
   .gallery-footer {
     text-align: center;
