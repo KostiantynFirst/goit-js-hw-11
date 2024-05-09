@@ -46,8 +46,6 @@ async function fetchArticles(value) {
 
 
 
-fetchArticles();
-
 
 // const searchForm = document.querySelector('.js-search-form');
 // // const formInput = document.querySelector('.form-control')
