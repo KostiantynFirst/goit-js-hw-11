@@ -15,11 +15,12 @@ searchForm.addEventListener('submit', (e) => {
    if (form === null || form === '') {
     iziToast.info({
     title: 'Please type something in the search input',
-    // message: 'Welcome!',
+      position: 'topRight',
     });
    } else {
      fetchArticles(form)
      console.log(form);
+     searchForm.reset();
   }
 
 })
@@ -34,8 +35,8 @@ async function fetchArticles(value) {
         if (photos.length === 0) {
         
       iziToast.error({
-        title: 'Sorry, there are no images matching your search query. Please try again.',
-        message: 'Illegal operation',
+        title: 'Sorry, there are no images matching your search query',
+        position: 'topRight',
       });
         }
     
