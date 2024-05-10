@@ -2,6 +2,10 @@ import axios from "axios";
 import iziToast from "izitoast";
 import "izitoast/dist/css/iziToast.min.css";
 
+import SimpleLightbox from "simplelightbox";
+// Додатковий імпорт стилів
+import "simplelightbox/dist/simple-lightbox.min.css";
+
 const articleContainer = document.querySelector('.gallery');
 
 const API_KEY  = '31511712-b53d42f48d96ff6235f6befd4';
@@ -23,6 +27,7 @@ searchForm.addEventListener('submit', (e) => {
      fetchArticles(form)
      console.log(form);
      searchForm.reset();
+     clearArticlesContainer();
   }
 
 })
@@ -43,6 +48,9 @@ async function fetchArticles(value) {
     } else {
       renderGallery(photos);
     }
+  
+  let lightbox = new SimpleLightbox('.gallery a');
+  lightbox.refresh();
   }
 
 
@@ -77,5 +85,11 @@ function renderGallery(images) {
    articleContainer.insertAdjacentHTML('beforeend', createMarkupPage);
 
 }
+
+function clearArticlesContainer() {
+  articleContainer.innerHTML = '';
+
+}
+
 
 
