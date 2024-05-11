@@ -6,15 +6,18 @@ import SimpleLightbox from "simplelightbox";
 // Додатковий імпорт стилів
 import "simplelightbox/dist/simple-lightbox.min.css";
 
+import { renderGallery } from "./js/render-functions"; 
+import { fetchArticles } from "./js/pixabay-api";
+
 const articleContainer = document.querySelector('.gallery');
 
-const API_KEY  = '31511712-b53d42f48d96ff6235f6befd4';
-axios.defaults.baseURL = 'https://pixabay.com/api/';
-
+const loaderHtml = '<div id="loader" class="loader"></div>';
 
 const searchForm = document.querySelector('.search-form');
 
-searchForm.addEventListener('submit', (e) => {
+searchForm.addEventListener('submit', handleFormSubmit);
+  
+  function handleFormSubmit(e) { 
   e.preventDefault();
 
   let form = (e.currentTarget.elements.searchQuery.value).trim();
@@ -24,21 +27,19 @@ searchForm.addEventListener('submit', (e) => {
       position: 'topRight',
     });
    } else {
-     fetchArticles(form)
+     main(form)
      console.log(form);
      searchForm.reset();
      clearArticlesContainer();
   }
 
-})
+}
 
-async function fetchArticles(value) {
+async function main(value) {
  
-
   try {
-    const res = await axios.get(`?key=${API_KEY}&q=${value}&image_type=photo&orientation=horizontal&safesearch=true`);
-    console.log(res.data.hits);
-    const photos = res.data.hits;
+
+    const photos = await fetchArticles(value);
     
     if (photos.length === 0) {
         
@@ -47,7 +48,7 @@ async function fetchArticles(value) {
         position: 'topRight',
       })
     } else {
-        renderGallery(photos);
+        renderGallery(articleContainer, photos);
       }
       
   
@@ -60,37 +61,6 @@ async function fetchArticles(value) {
 
 }
 
-function renderGallery(images) {
-  const createMarkupPage = images.map(article => {
-    return `
-    <div class="photo-card">
-        <a class ="thumb" href="${article.largeImageURL}"><img class="img" src="${article.webformatURL}" alt="${article.tags}" loading="lazy" /> </a> 
-      <div class="info">
-        <p class="info-item">
-          <b>Likes</b>
-          ${article.likes}
-        </p>
-        <p class="info-item">
-          <b>Views</b>
-          ${article.views}
-        </p>
-        <p class="info-item">
-          <b>Comments</b>
-          ${article.comments}
-        </p>
-        <p class="info-item">
-          <b>Downloads</b>
-          ${article.downloads}
-        </p>
-      </div>
-    </div>
-  `;
-})
-.join('');
-
-   articleContainer.insertAdjacentHTML('beforeend', createMarkupPage);
-
-}
 
 function clearArticlesContainer() {
   articleContainer.innerHTML = '';
