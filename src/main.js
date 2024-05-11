@@ -27,9 +27,9 @@ searchForm.addEventListener('submit', handleFormSubmit);
     });
    } else {
      main(form)
-     console.log(form);
+    //  console.log(form);
      searchForm.reset();
-     clearArticlesContainer();
+     
   }
 
 }
@@ -39,6 +39,7 @@ async function main(value) {
   try {
 
     articleContainer.insertAdjacentHTML("beforebegin", loaderMarkup);
+    clearArticlesContainer();
 
     const photos = await fetchArticles(value);
 
