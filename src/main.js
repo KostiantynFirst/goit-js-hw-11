@@ -1,4 +1,3 @@
-import axios from "axios";
 import iziToast from "izitoast";
 import "izitoast/dist/css/iziToast.min.css";
 
@@ -11,7 +10,7 @@ import { fetchArticles } from "./js/pixabay-api";
 
 const articleContainer = document.querySelector('.gallery');
 
-const loaderHtml = '<div id="loader" class="loader"></div>';
+const loaderMarkup  = '<div id="loader" class="loader"></div>';
 
 const searchForm = document.querySelector('.search-form');
 
@@ -39,7 +38,14 @@ async function main(value) {
  
   try {
 
+    articleContainer.insertAdjacentHTML("beforebegin", loaderMarkup);
+
     const photos = await fetchArticles(value);
+
+    const loaderSpinner = document.querySelector('#loader');
+    if (loaderSpinner) {
+      loaderSpinner.remove();
+    }
     
     if (photos.length === 0) {
         
@@ -64,7 +70,6 @@ async function main(value) {
 
 function clearArticlesContainer() {
   articleContainer.innerHTML = '';
-
 }
 
 
