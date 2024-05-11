@@ -2,14 +2,12 @@ import iziToast from "izitoast";
 import "izitoast/dist/css/iziToast.min.css";
 
 import SimpleLightbox from "simplelightbox";
-// Додатковий імпорт стилів
 import "simplelightbox/dist/simple-lightbox.min.css";
 
 import { renderGallery } from "./js/render-functions"; 
 import { fetchArticles } from "./js/pixabay-api";
 
 const articleContainer = document.querySelector('.gallery');
-
 const loaderMarkup  = '<div id="loader" class="loader"></div>';
 
 const searchForm = document.querySelector('.search-form');
