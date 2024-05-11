@@ -35,6 +35,7 @@ searchForm.addEventListener('submit', (e) => {
 async function fetchArticles(value) {
  
 
+  try {
     const res = await axios.get(`?key=${API_KEY}&q=${value}&image_type=photo&orientation=horizontal&safesearch=true`);
     console.log(res.data.hits);
     const photos = res.data.hits;
@@ -46,13 +47,18 @@ async function fetchArticles(value) {
         position: 'topRight',
       })
     } else {
-      renderGallery(photos);
-    }
+        renderGallery(photos);
+      }
+      
   
   let lightbox = new SimpleLightbox('.gallery a');
-  lightbox.refresh();
+      lightbox.refresh();
+      
+  } catch (error) {
+    console.log(error)
   }
 
+}
 
 function renderGallery(images) {
   const createMarkupPage = images.map(article => {
